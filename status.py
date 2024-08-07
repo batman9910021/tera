@@ -25,10 +25,10 @@ def format_progress_bar(filename, percentage, done, total_size, status, eta, spe
             return f"{hours} hr {minutes} min"
     
     return (
-        f"┏ ғɪʟᴇɴᴀᴍᴇ: {filename}\n"
+        f"<b>┏ ғɪʟᴇɴᴀᴍᴇ:</b> {filename}\n"
         f"┠ [{bar}] {percentage:.2f}%\n"
-        f"┠ ᴘʀᴏᴄᴇssᴇᴅ: {format_size(done)} ᴏғ {format_size(total_size)}\n"
-        f"┠ sᴛᴀᴛᴜs: {status}\n"
-        f"┠ sᴘᴇᴇᴅ: {format_size(speed)}/s\n"
-        f"┖ ᴜsᴇʀ: {user_mention} | ɪᴅ: {user_id}" 
+        f"<b>┠ ᴘʀᴏᴄᴇssᴇᴅ:</b> {format_size(done)} ᴏғ {format_size(total_size)}\n"
+        f"<b>┠ sᴛᴀᴛᴜs:</b> {status}\n"
+        f"<b>┠ sᴘᴇᴇᴅ:</b> {format_size(speed)}/s\n"
+        f"<b>┖ ᴜsᴇʀ:</b> {user_mention} | <b>ɪᴅ:</b>{user_id}" 
     )
