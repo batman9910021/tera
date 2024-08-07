@@ -94,7 +94,7 @@ async def handle_message(client, message: Message):
         await upload_video(client, file_path, thumbnail_path, video_title, reply_msg, dump_id, user_mention, user_id, message)
     except Exception as e:
         logging.error(f"Error handling message: {e}")
-        await reply_msg.edit_text("Sorry <b>{user_mention}!</b>\nYour upload has been stopped.\n\n<b>Reason :</b> Terabox Api Failed to Give Download Link. Retry...\n<b>Mode :</b> Telegram")
+        await reply_msg.edit_text("Sorry Dear 😞\nYour upload has been stopped.\n\n<b>Reason :</b> Terabox Api Failed to Give Download Link. Retry...\n<b>Mode :</b> Telegram")
 
 if __name__ == "__main__":
     keep_alive()
