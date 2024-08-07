@@ -87,14 +87,14 @@ async def handle_message(client, message: Message):
         await message.reply_text("ᴘʟᴇᴀsᴇ sᴇɴᴅ ᴀ ᴠᴀʟɪᴅ ᴛᴇʀᴀʙᴏx ʟɪɴᴋ.")
         return
 
-    reply_msg = await message.reply_text("sᴇɴᴅɪɴɢ ʏᴏᴜ ᴛʜᴇ ᴍᴇᴅɪᴀ...🤤")
+    reply_msg = await message.reply_text("<b>Processing your request...</b>")
 
     try:
         file_path, thumbnail_path, video_title = await download_video(terabox_link, reply_msg, user_mention, user_id)
         await upload_video(client, file_path, thumbnail_path, video_title, reply_msg, dump_id, user_mention, user_id, message)
     except Exception as e:
         logging.error(f"Error handling message: {e}")
-        await reply_msg.edit_text("ғᴀɪʟᴇᴅ ᴛᴏ ᴘʀᴏᴄᴇss ʏᴏᴜʀ ʀᴇǫᴜᴇsᴛ.\nᴛʜɪs ɪs ᴛʜᴇ ᴛᴇʀᴀʙᴏx ɪssᴜᴇ,\nᴘʟᴇᴀsᴇ ᴛʀʏ ᴀɢᴀɪɴ ᴏʀ ʟᴇᴇᴄʜ ᴀɢᴀɪɴ ᴡɪᴛʜ ᴀɴᴏᴛʜᴇʀ ʟɪɴᴋ\nɪ ʜᴏᴘᴇ ʏᴏᴜ ᴜɴᴅᴇʀsᴛᴀɴᴅ\nᴛʜᴀɴᴋ ʏᴏᴜ 😊")
+        await reply_msg.edit_text("Sorry <b>{user_mention}!</b>\nYour upload has been stopped.\n\n<b>Reason :</b> Terabox Api Failed to Give Download Link. Retry...\n<b>Mode :</b> Telegram")
 
 if __name__ == "__main__":
     keep_alive()
