@@ -39,7 +39,7 @@ async def download_video(url, reply_msg, user_mention, user_id):
         download = aria2.add_uris([fast_download_link])
         start_time = datetime.now()
 
-    while not download.is_complete:
+        while not download.is_complete:
             download.update()
             percentage = download.progress
             done = download.completed_length
