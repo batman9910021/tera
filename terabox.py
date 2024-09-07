@@ -56,7 +56,16 @@ async def start_command(client, message):
     join_button = InlineKeyboardButton("❤️ ᴊᴏɪɴ ❤️", url="https://t.me/MrSagarBots")
     developer_button = InlineKeyboardButton("ᴅᴇᴠᴇʟᴏᴘᴇʀ ⚡️", url="https://t.me/MrSagar0")
     reply_markup = InlineKeyboardMarkup([[join_button, developer_button]])
-    await message.reply_text(reply_message, reply_markup=reply_markup)
+    video_file_id = "/app/Jet-Mirror.mp4"
+    if os.path.exists(video_file_id):
+        await client.send_video(
+            chat_id=message.chat.id,
+            video=video_file_id,
+            caption=reply_message,
+            reply_markup=reply_markup
+        )
+    else:
+        await message.reply_text(reply_message, reply_markup=reply_markup)
 
 async def is_user_member(client, user_id):
     try:
@@ -72,6 +81,10 @@ async def is_user_member(client, user_id):
 
 @app.on_message(filters.text & filters.group)
 async def handle_message(client, message: Message):
+    if message.from_user is None:
+        logging.error("Message does not contain user information.")
+        return
+        
     user_id = message.from_user.id
     user_mention = message.from_user.mention
     is_member = await is_user_member(client, user_id)
@@ -79,11 +92,17 @@ async def handle_message(client, message: Message):
     if not is_member:
         join_button = InlineKeyboardButton("❤️ ᴊᴏɪɴ ❤️", url="https://t.me/MrSagarBots")
         reply_markup = InlineKeyboardMarkup([[join_button]])
-        await message.reply_text("ᴊᴏɪɴ ᴍʏ ᴄʜᴀɴɴᴇʟ ᴛᴏ ᴜsᴇ ᴍᴇ.", reply_markup=reply_markup)
+        await message.reply_text("ʏᴏᴜ ᴍᴜsᴛ ᴊᴏɪɴ ᴍʏ ᴄʜᴀɴɴᴇʟ ᴛᴏ ᴜsᴇ ᴍᴇ.", reply_markup=reply_markup)
         return
 
+    valid_domains = [
+    'terabox.com', 'nephobox.com', '4funbox.com', 'mirrobox.com', 
+    'momerybox.com', 'teraboxapp.com', '1024tera.com', 
+    'terabox.app', 'gibibox.com', 'goaibox.com', 'terasharelink.com', 'teraboxlink.com'
+    ]
+
     terabox_link = message.text.strip()
-    if "terabox" not in terabox_link:
+    if not any(domain in terabox_link for domain in valid_domains):
         await message.reply_text("ᴘʟᴇᴀsᴇ sᴇɴᴅ ᴀ ᴠᴀʟɪᴅ ᴛᴇʀᴀʙᴏx ʟɪɴᴋ.")
         return
 
